@@ -1,0 +1,106 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Movie {
+  """Example field (placeholder)"""
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  description: String!
+  actorId: Int!
+  authorId: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Actor {
+  """Example field (placeholder)"""
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  gender: String!
+  age: Int!
+}
+
+type Author {
+  """Example field (placeholder)"""
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  gender: String!
+  age: Int!
+}
+
+type Query {
+  movies: [Movie!]!
+  movie(id: Int!): Movie!
+  actors: [Actor!]!
+  actor(id: Int!): Actor!
+  authors: [Author!]!
+  author(id: Int!): Author!
+}
+
+type Mutation {
+  createMovie(createMovieInput: CreateMovieInput!): Movie!
+  updateMovie(updateMovieInput: UpdateMovieInput!): Movie!
+  removeMovie(id: Int!): Movie!
+  createActor(createActorInput: CreateActorInput!): Actor!
+  updateActor(updateActorInput: UpdateActorInput!): Actor!
+  removeActor(id: Int!): Actor!
+  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
+  updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
+  removeAuthor(id: Int!): Author!
+}
+
+input CreateMovieInput {
+  title: String!
+  description: String!
+  actorId: Int!
+  authorId: Int!
+}
+
+input UpdateMovieInput {
+  title: String
+  description: String!
+  actorId: Int!
+  authorId: Int!
+
+  """Example field (placeholder)"""
+  id: Int!
+  updatedAt: DateTime! = "2023-02-01T06:58:23.532Z"
+}
+
+input CreateActorInput {
+  name: String!
+  gender: String!
+  age: Int!
+}
+
+input UpdateActorInput {
+  name: String!
+  gender: String!
+  age: Int!
+  id: Int!
+  updatedAt: DateTime! = "2023-02-01T06:58:23.871Z"
+}
+
+input CreateAuthorInput {
+  name: String!
+  gender: String!
+  age: Int!
+}
+
+input UpdateAuthorInput {
+  name: String!
+  gender: String!
+  age: Int!
+  id: Int!
+  updatedAt: DateTime! = "2023-02-01T06:58:23.884Z"
+}

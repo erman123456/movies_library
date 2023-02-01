@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../src/@generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Actors {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  name      String   @db.VarChar(100)
+  gender    String   @db.Char(10)
+  age       Int
+  Movies    Movies[]
+
+  @@map("actors")
+}
+
+model Authors {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  name      String   @db.VarChar(100)
+  gender    String   @db.Char(10)
+  age       Int
+  Movies    Movies[]
+
+  @@map("authors")
+}
+
+model Movies {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  title       String   @db.VarChar(50)
+  description String?
+  actorId     Int?
+  authorId    Int?
+  actor       Actors?   @relation(fields: [actorId], references: [id])
+  author      Authors?  @relation(fields: [authorId], references: [id])
+
+  @@map("movies")
+}
