@@ -7,17 +7,23 @@ generator nestgraphql {
   output   = "../src/@generated"
 }
 
+// TODO CONFIG POSTGRESQL
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL_SQLITE")
 }
 
 model Actors {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  name      String   @db.VarChar(100)
-  gender    String   @db.Char(10)
+  name      String
+  gender    String
   age       Int
   Movies    Movies[]
 
@@ -28,8 +34,8 @@ model Authors {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  name      String   @db.VarChar(100)
-  gender    String   @db.Char(10)
+  name      String
+  gender    String
   age       Int
   Movies    Movies[]
 
@@ -40,7 +46,7 @@ model Movies {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-  title       String   @db.VarChar(50)
+  title       String
   description String?
   actorId     Int?
   authorId    Int?

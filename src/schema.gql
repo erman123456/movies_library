@@ -74,7 +74,7 @@ input UpdateMovieInput {
 
   """Example field (placeholder)"""
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T06:58:23.532Z"
+  updatedAt: DateTime! = "2023-02-01T08:30:18.962Z"
 }
 
 input CreateActorInput {
@@ -88,7 +88,7 @@ input UpdateActorInput {
   gender: String!
   age: Int!
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T06:58:23.871Z"
+  updatedAt: DateTime! = "2023-02-01T08:30:19.145Z"
 }
 
 input CreateAuthorInput {
@@ -102,5 +102,5 @@ input UpdateAuthorInput {
   gender: String!
   age: Int!
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T06:58:23.884Z"
+  updatedAt: DateTime! = "2023-02-01T08:30:19.149Z"
 }
