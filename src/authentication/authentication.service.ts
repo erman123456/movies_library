@@ -36,8 +36,16 @@ export class AuthenticationService {
   }
 
   async signUp(createAuthenticationInput: CreateAuthenticationInput) {
+    // find the user by email
+    const user = await this.prismaService.accounts.findUnique({
+      where: {
+        email: createAuthenticationInput.email,
+      },
+    });
+    // if user does not exist throw exception
+    if (user) throw new ForbiddenException('Email has been register');
+    //compare password
     const hash = await argon.hash(createAuthenticationInput.password);
-
     await this.prismaService.accounts.create({
       data: {
         email: createAuthenticationInput.email,
@@ -82,8 +90,9 @@ export class AuthenticationService {
   async signToken(
     createAuthenticationInput: CreateAuthenticationInput,
   ): Promise<{ access_token: string }> {
+    const { email } = createAuthenticationInput;
     const payload = {
-      createAuthenticationInput,
+      email,
     };
     const token: string = jwt.sign(payload, process.env.JWT_SECRET);
     return {

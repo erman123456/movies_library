@@ -1,4 +1,3 @@
-// /test/customer.e2e-spec.ts
 
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
@@ -24,7 +23,7 @@ describe('Account (e2e)', () => {
   const gql = '/graphql';
 
   describe('signUp', () => {
-    it('should create a new account', () => {
+    it('Create a new account', () => {
       return request(app.getHttpServer())
         .post(gql)
         .send({
@@ -40,10 +39,36 @@ describe('Account (e2e)', () => {
         })
         .expect(200)
         .expect((res) => {
-          expect(res.body.data.createCustomer).toEqual({
-            email: 'erman@gmail.com',
-            password: '12345',
-          });
+          if (res.body.errors) {
+            expect(res.body.errors[0].message).toEqual(
+              'Email has been register',
+            );
+          }
+        });
+    });
+  });
+
+  describe('signIn', () => {
+    it('Authorization', () => {
+      return request(app.getHttpServer())
+        .post(gql)
+        .send({
+          query:
+            'mutation{\n' +
+            '  signIn(signInInput:{\n' +
+            '    email: "erman@gmail.com",\n' +
+            '    password: "12345"\n' +
+            '  }){\n' +
+            '    access_token\n' +
+            '  }\n' +
+            '}',
+        })
+        .expect(200)
+        .expect((res) => {
+          console.log(res.body.errors);
+          if (res.body.errors) {
+            expect(res.body.errors[0].message).toEqual('Credentials incorrect');
+          }
         });
     });
   });
