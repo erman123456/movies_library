@@ -15,7 +15,7 @@ export class AuthenticationResolver {
     @Args('signUpInput')
     signUpInput: CreateAuthenticationInput,
   ) {
-    return this.authenticationService.signIn(signUpInput);
+    return this.authenticationService.signUp(signUpInput);
   }
 
   @Mutation(() => Authentication)
@@ -23,7 +23,7 @@ export class AuthenticationResolver {
     @Args('signInInput')
     signInInput: CreateAuthenticationInput,
   ) {
-    return this.authenticationService.signUp(signInInput);
+    return this.authenticationService.signIn(signInInput);
   }
 
   @UseGuards(AuthGuard)

@@ -8,15 +8,15 @@ generator nestgraphql {
 }
 
 // TODO CONFIG POSTGRESQL
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
-
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL_SQLITE")
+  provider = "postgresql"
+  url      = env("DATABASE_URL_POSTGRESQL")
 }
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL_SQLITE")
+// }
 model Accounts {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())

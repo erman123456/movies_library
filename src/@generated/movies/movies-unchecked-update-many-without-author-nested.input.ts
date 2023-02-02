@@ -4,6 +4,7 @@ import { MoviesCreateWithoutAuthorInput } from './movies-create-without-author.i
 import { Type } from 'class-transformer';
 import { MoviesCreateOrConnectWithoutAuthorInput } from './movies-create-or-connect-without-author.input';
 import { MoviesUpsertWithWhereUniqueWithoutAuthorInput } from './movies-upsert-with-where-unique-without-author.input';
+import { MoviesCreateManyAuthorInputEnvelope } from './movies-create-many-author-input-envelope.input';
 import { MoviesWhereUniqueInput } from './movies-where-unique.input';
 import { MoviesUpdateWithWhereUniqueWithoutAuthorInput } from './movies-update-with-where-unique-without-author.input';
 import { MoviesUpdateManyWithWhereWithoutAuthorInput } from './movies-update-many-with-where-without-author.input';
@@ -23,6 +24,10 @@ export class MoviesUncheckedUpdateManyWithoutAuthorNestedInput {
     @Field(() => [MoviesUpsertWithWhereUniqueWithoutAuthorInput], {nullable:true})
     @Type(() => MoviesUpsertWithWhereUniqueWithoutAuthorInput)
     upsert?: Array<MoviesUpsertWithWhereUniqueWithoutAuthorInput>;
+
+    @Field(() => MoviesCreateManyAuthorInputEnvelope, {nullable:true})
+    @Type(() => MoviesCreateManyAuthorInputEnvelope)
+    createMany?: MoviesCreateManyAuthorInputEnvelope;
 
     @Field(() => [MoviesWhereUniqueInput], {nullable:true})
     @Type(() => MoviesWhereUniqueInput)
