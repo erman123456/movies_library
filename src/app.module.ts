@@ -7,6 +7,7 @@ import { join } from 'path';
 import { ActorsModule } from './actors/actors.module';
 import { PrismaModule } from './config/prisma/prisma.module';
 import { AuthorsModule } from './authors/authors.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthorsModule } from './authors/authors.module';
     MoviesModule,
     ActorsModule,
     AuthorsModule,
+    AuthenticationModule,
   ],
 })
 export class AppModule {}

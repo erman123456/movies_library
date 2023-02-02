@@ -3,8 +3,11 @@ import { AuthorsService } from './authors.service';
 import { Author } from './entities/author.entity';
 import { CreateAuthorInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../authentication/auth.gaurd';
 
 @Resolver(() => Author)
+@UseGuards(AuthGuard)
 export class AuthorsResolver {
   constructor(private readonly authorsService: AuthorsService) {}
 

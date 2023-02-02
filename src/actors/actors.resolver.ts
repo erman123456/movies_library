@@ -3,8 +3,11 @@ import { ActorsService } from './actors.service';
 import { Actor } from './entities/actor.entity';
 import { CreateActorInput } from './dto/create-actor.input';
 import { UpdateActorInput } from './dto/update-actor.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../authentication/auth.gaurd';
 
 @Resolver(() => Actor)
+@UseGuards(AuthGuard)
 export class ActorsResolver {
   constructor(private readonly actorsService: ActorsService) {}
 

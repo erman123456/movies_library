@@ -3,8 +3,11 @@ import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
 import { CreateMovieInput } from './dto/create-movie.input';
 import { UpdateMovieInput } from './dto/update-movie.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../authentication/auth.gaurd';
 
 @Resolver(() => Movie)
+@UseGuards(AuthGuard)
 export class MoviesResolver {
   constructor(private readonly moviesService: MoviesService) {}
 

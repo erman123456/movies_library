@@ -17,6 +17,15 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL_SQLITE")
 }
+model Accounts {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  email     String  @unique
+  password  String
+
+  @@map("accounts")
+}
 
 model Actors {
   id        Int      @id @default(autoincrement())
@@ -50,8 +59,8 @@ model Movies {
   description String?
   actorId     Int?
   authorId    Int?
-  actor       Actors?   @relation(fields: [actorId], references: [id])
-  author      Authors?  @relation(fields: [authorId], references: [id])
+  actor       Actors?  @relation(fields: [actorId], references: [id])
+  author      Authors? @relation(fields: [authorId], references: [id])
 
   @@map("movies")
 }

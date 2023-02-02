@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { ConfigService } from '@nestjs/config';
-
-@Injectable()
 export class PrismaService extends PrismaClient {
   constructor(config: ConfigService) {
     super({
       datasources: {
         db: {
-          url: config.get('DATABASE_URL_SQLITE'),
+          url: process.env.DATABASE_URL_SQLITE,
         },
       },
     });
@@ -17,7 +15,7 @@ export class PrismaService extends PrismaClient {
     return this.$transaction([
       this.actors.deleteMany(),
       this.authors.deleteMany(),
-      this.movies.deleteMany()
+      this.movies.deleteMany(),
     ]);
   }
 }

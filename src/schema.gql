@@ -38,6 +38,17 @@ type Author {
   age: Int!
 }
 
+type Authentication {
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
+
+  """access token of the user"""
+  access_token: String!
+}
+
 type Query {
   movies: [Movie!]!
   movie(id: Int!): Movie!
@@ -45,6 +56,8 @@ type Query {
   actor(id: Int!): Actor!
   authors: [Author!]!
   author(id: Int!): Author!
+  account: [Authentication!]!
+  authentication(email: String!): Authentication!
 }
 
 type Mutation {
@@ -57,6 +70,10 @@ type Mutation {
   createAuthor(createAuthorInput: CreateAuthorInput!): Author!
   updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
   removeAuthor(id: Int!): Author!
+  signUp(signUpInput: CreateAuthenticationInput!): Authentication!
+  signIn(signInInput: CreateAuthenticationInput!): Authentication!
+  updateAuthentication(updateAuthenticationInput: UpdateAuthenticationInput!): Authentication!
+  removeAuthentication(id: Int!): Authentication!
 }
 
 input CreateMovieInput {
@@ -74,7 +91,7 @@ input UpdateMovieInput {
 
   """Example field (placeholder)"""
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T08:40:12.549Z"
+  updatedAt: DateTime! = "2023-02-02T13:53:52.338Z"
 }
 
 input CreateActorInput {
@@ -88,7 +105,7 @@ input UpdateActorInput {
   gender: String!
   age: Int!
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T08:40:12.727Z"
+  updatedAt: DateTime! = "2023-02-02T13:53:52.546Z"
 }
 
 input CreateAuthorInput {
@@ -102,5 +119,23 @@ input UpdateAuthorInput {
   gender: String!
   age: Int!
   id: Int!
-  updatedAt: DateTime! = "2023-02-01T08:40:12.734Z"
+  updatedAt: DateTime! = "2023-02-02T13:53:52.550Z"
+}
+
+input CreateAuthenticationInput {
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
+}
+
+input UpdateAuthenticationInput {
+  """email of the user"""
+  email: String
+
+  """password of the user"""
+  password: String
+  id: Int!
+  updatedAt: DateTime! = "2023-02-02T13:53:52.582Z"
 }
