@@ -3,6 +3,7 @@ workflows:
   build:
     jobs:
       - test
+      - create-review-app
 jobs:
   test:
     docker:
