@@ -1,26 +1,29 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  build:
     jobs:
-      - say-hello
+      - test
+jobs:
+  test:
+    docker:
+      - image: cimg/node:19.5.0
+      - image: cimg/postgres:10.17
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: "trust"
+    environment:
+      NODE_ENV: test
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    steps:
+      - run:
+          name: Waiting for Postgres to be ready
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - checkout
+      - run: npm i @prisma/client
+      - run: npm i prisma-graphql-type-decimal
+      - run: npm i prisma-nestjs-graphql
+      - run: sudo npm install -g prisma
+      - run: sudo prisma generate
+      - run: npm run start test:e2e
+      - run: npm run start build
