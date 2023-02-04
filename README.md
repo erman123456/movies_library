@@ -58,6 +58,67 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Example Test
+
+```bash
+# SignUp
+mutation{
+  signUp(signUpInput:{
+    email: "erman@gmail.com",
+    password: "123"
+  }){
+    access_token
+  }
+}
+
+# SignIn
+mutation{
+  signIn(signInInput:{
+    email: "erman@gmail.com",
+    password: "123"
+  }){
+    access_token
+  }
+}
+```
+
+## Example Test With Http Headers { "authorization": "Bearer Token" }
+
+```bash
+# Create Actor
+mutation{
+  createActor(createActorInput:{
+    name: "Kate Winslet",
+    gender: "Female",
+    age: 47
+  }){
+    name
+  }
+}
+
+# Create Author
+mutation{
+  createAuthor(createAuthorInput:{
+    name: "Erman",
+    gender: "Male",
+    age: 26
+  }){
+    name
+  }
+}
+# Create Movie
+mutation{
+  createMovie(createMovieInput:{
+    title: "Avatar",
+    description: "Set more than a decade after the events of the first film, “Avatar: The Way of Water” begins to tell the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+    actorId:1,
+    authorId:1
+  }){
+    title
+  }
+}
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
