@@ -12,6 +12,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
+      introspection: true,
+      playground: true,
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
