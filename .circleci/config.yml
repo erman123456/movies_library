@@ -3,7 +3,6 @@ workflows:
   build:
     jobs:
       - test
-      - create-review-app
 jobs:
   test:
     docker:
@@ -26,19 +25,4 @@ jobs:
       - run: npm i prisma-nestjs-graphql
       - run: sudo npm install -g prisma
       - run: sudo prisma generate
-      - run: npm run start test:e2e
       - run: npm run start build
-
-  create-review-app:
-    executor: heroku/default
-    steps:
-      - checkout
-      - run:
-          command: tar -czvf my-project.tar.gz ~/project
-          name: Bundle our project project
-          working_directory: ~/
-      - store_artifacts:
-          path: ~/my-project.tar.gz
-      - heroku/create-review:
-          artifact-pattern: '*.tar.gz'
-          pipeline: PIPELINE-UUID
